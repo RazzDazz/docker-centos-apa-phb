@@ -34,12 +34,12 @@ RUN sed -i "s/#ServerName www.example.com:80/ServerName localhost:80/g" /etc/htt
 RUN mkdir -p /run/php-fpm
 
 # Copy helper scripts into container
-COPY startup.sh /tmp/startup.sh
-RUN chmod 777 /tmp/startup.sh
+COPY docker-entrypoint.sh /tmp/docker-entrypoint.sh
+RUN chmod 777 /tmp/docker-entrypoint.sh
 
 # Publishing directories
 VOLUME /var/log/httpd/
 VOLUME /var/log/php-fpm
 
 # Start httpd and php-fpm using supervisor
-CMD ["/tmp/startup.sh"] 
+CMD ["/tmp/docker-entrypoint.sh"] 
